@@ -1,5 +1,4 @@
-# Projects
-Data Analysis Projects
+#Data Analysis Projects
 
 ##EDA using Python
 1. Data Overview
