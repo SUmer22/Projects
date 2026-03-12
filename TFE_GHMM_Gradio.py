@@ -199,12 +199,18 @@ def load_kse100(filepath: str, start: str, end: str) -> pd.DataFrame:
     raw_df = raw_df.dropna(subset=["Date"])
     raw_df = raw_df.set_index("Date").sort_index()
 
-    # Clean numeric columns
+    # Clean numeric columns — handle dash/NA placeholders common in KSE-100 CSVs
+    _MISSING = {"-", "--", "n/a", "na", "nan", "null", "none", ""}
     for col in ["Open", "High", "Low", "Close", "Volume"]:
         if col in raw_df.columns:
             if raw_df[col].dtype == object:
+                # Strip thousand-separators and replace common placeholders with NaN
                 raw_df[col] = (
-                    raw_df[col].astype(str).str.replace(",", "").astype(float)
+                    raw_df[col]
+                    .astype(str)
+                    .str.replace(",", "", regex=False)
+                    .str.strip()
+                    .apply(lambda v: np.nan if str(v).lower() in _MISSING else v)
                 )
             raw_df[col] = pd.to_numeric(raw_df[col], errors="coerce")
 
