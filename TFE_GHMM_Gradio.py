@@ -10,7 +10,7 @@
 # HOW TO RUN LOCALLY:
 #   pip install gradio pandas numpy matplotlib seaborn yfinance ta hmmlearn scikit-learn scipy
 #   python TFE_GHMM_Gradio.py
-#   → Opens at http://localhost:7860
+#   → Opens at http://localhost:<port>  (default starts at 7860; auto-selects if busy)
 # ════════════════════════════════════════════════════════════════════════════
 
 # ── Section 0: Imports ───────────────────────────────────────────────────────
@@ -1228,5 +1228,7 @@ with gr.Blocks(
 
 if __name__ == "__main__":
     # In Colab: share=True is set automatically so you get a public gradio.live URL.
-    # Locally:  share=False — the app runs at http://localhost:7860.
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=IS_COLAB)
+    # Locally:  share=False — the app runs on the first available port (default 7860).
+    # Set GRADIO_SERVER_PORT env-var to pin a specific port.
+    _port = int(os.environ["GRADIO_SERVER_PORT"]) if "GRADIO_SERVER_PORT" in os.environ else None
+    demo.launch(server_name="0.0.0.0", server_port=_port, share=IS_COLAB)
