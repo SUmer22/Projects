@@ -1,6 +1,48 @@
-Customer Churn Analysis
+# Data Analysis Projects
 
-#Data Analysis Projects
+---
+
+## 📈 TFE-GHMM — KSE-100 Market Regime Detection
+
+A self-contained Gradio app that uses a Gaussian Hidden Markov Model to detect market regimes (Bull / Sideways / Bear) on the Pakistan Stock Exchange (KSE-100).
+
+### ⬇️ Download
+
+**[Download TFE_GHMM_Gradio.py](https://raw.githubusercontent.com/SUmer22/Projects/main/TFE_GHMM_Gradio.py)**
+(Right-click → Save link as… — links are active once this PR is merged to `main`)
+
+### 🚀 Run in Google Colab
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SUmer22/Projects/blob/main/TFE_GHMM_Gradio.py)
+
+Or paste these two cells manually:
+
+```python
+# Cell 1 — install dependencies
+!pip install gradio pandas numpy matplotlib seaborn yfinance ta hmmlearn scikit-learn scipy -q
+```
+
+```python
+# Cell 2 — paste the full contents of TFE_GHMM_Gradio.py and run
+# A public gradio.live URL will be printed automatically.
+```
+
+### 💻 Run Locally
+
+```bash
+pip install gradio pandas numpy matplotlib seaborn yfinance ta hmmlearn scikit-learn scipy
+python TFE_GHMM_Gradio.py
+# → http://localhost:7860
+```
+
+### 📋 Required CSV columns
+
+`Date`, `Open`, `High`, `Low`, `Close`, `Volume`
+Date format: `YYYY-MM-DD` (comma-formatted numbers are handled automatically)
+
+---
+
+## Customer Churn Analysis
 
 ##EDA using Python
 1. Data Overview
