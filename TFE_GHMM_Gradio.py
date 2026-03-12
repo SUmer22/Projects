@@ -4,12 +4,13 @@
 # ════════════════════════════════════════════════════════════════════════════
 # HOW TO RUN IN COLAB:
 #   Cell 1: !pip install gradio pandas numpy matplotlib seaborn yfinance ta hmmlearn scikit-learn scipy -q
-#   Cell 2: Run this entire file as one cell
-#   Note: Set share=True in demo.launch() at the bottom for a public URL
+#   Cell 2: Paste or upload this entire file and run it as one cell
+#   → A public gradio.live URL is printed automatically when running in Colab
 #
 # HOW TO RUN LOCALLY:
 #   pip install gradio pandas numpy matplotlib seaborn yfinance ta hmmlearn scikit-learn scipy
 #   python TFE_GHMM_Gradio.py
+#   → Opens at http://localhost:7860
 # ════════════════════════════════════════════════════════════════════════════
 
 # ── Section 0: Imports ───────────────────────────────────────────────────────
@@ -88,6 +89,14 @@ try:
 except ImportError:
     os.system("pip install gradio -q")
     import gradio as gr
+
+# ── Colab detection ──────────────────────────────────────────────────────────
+# Automatically True when running inside Google Colab; False everywhere else.
+try:
+    import google.colab  # noqa: F401
+    IS_COLAB = True
+except ImportError:
+    IS_COLAB = False
 
 
 # ── Section 1: Global Constants ──────────────────────────────────────────────
@@ -1212,5 +1221,6 @@ with gr.Blocks(
 # ── Section 9: Launch ─────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # Set share=True for Colab public URL
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=False)
+    # In Colab: share=True is set automatically so you get a public gradio.live URL.
+    # Locally:  share=False — the app runs at http://localhost:7860.
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=IS_COLAB)
